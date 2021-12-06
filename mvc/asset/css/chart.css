@@ -1,0 +1,118 @@
+.chart 
+{
+	background-color: var(--background-my-modal);
+	border:1px solid pink;
+	padding: 10px;	
+	text-align: center;
+	border-radius: 5px;
+	box-shadow: 1px 2px var(--gray);
+}
+.chart h4
+{
+	color:red;
+}
+table
+{
+	width: 80%;
+	border:1px solid var(--dark);
+	text-align: center;
+	background-color: white;
+	float: left;
+}
+tr
+{
+	padding-top:0px;
+	border-radius: 5px;
+}
+td
+{
+	width: 100px;
+	height: 100px;
+	vertical-align: top;
+}
+tr td:first-child
+{
+	border-right: 1px solid black;
+}
+#end td
+{
+	height: 0px;
+}
+/*!
+ * left + 139
+ * 
+ */
+#row-1 
+{
+	background-color: var(--bluesky);
+	position: absolute;
+	height: 290px;
+	display: inline-grid;
+	bottom:35px;
+	left: 150px;
+	width: 139.19px;
+}
+#row-2
+{
+	background-color: yellow;
+	position: absolute;
+	height: 69px;
+	display: inline-grid;
+	bottom:35px;
+	left: 289px;
+	width: 139.19px;
+}
+#row-3
+{
+	background-color: red;
+	position: absolute;
+	height: 90px;
+	display: inline-grid;
+	bottom:35px;
+	left: 428px;
+	width: 139.19px;
+}
+#row-4
+{
+	background-color: pink;
+	position: absolute;
+	height: 400px;
+	display: inline-grid;
+	bottom:35px;
+	left: 567px;
+	width: 139.19px;
+}
+.note-chart
+{
+	display: inline;
+}
+.note-chart ul li, .note-chart ul li
+{
+	width: 20%;
+	float: left;
+	display: inline;
+}
+.list-note 
+{
+	background-color: pink;
+}
+.col-md-9
+{
+	display: inline;
+}
+.col-md-3
+{
+	display: inline;
+}
+#color-1
+{
+	background-color: var(--bluesky);
+}
+#color-2
+{
+	background-color: yellow;
+}
+#color-3
+{
+	background-color: red;
+}

@@ -1,0 +1,147 @@
+
+h4
+{
+	font-size: 16px;
+	padding: 15px;
+	color:red;
+}
+.detail-list
+{
+	border-radius: 5px;
+	box-shadow: 1px 2px var(--gray);
+	background-color: var(--background-my-modal);
+	display: inline;
+	padding: 10px;	
+}
+.header-list
+{
+	overflow:hidden;
+	padding:6px 15px;	
+	margin:5px 0px 5px 0px;
+	font-weight:bold;
+	list-style:none;
+	border-bottom:1px solid rgb(108, 134, 114);
+	background-color:rgb(255, 255, 254);
+	border-radius: 5px;
+}
+.header-list li, .danhsach-item li, .danhsach-subitem-header li, .danhsach-subitem-item li
+{
+	float:left;
+}
+.danhsach-item li img:hover
+{
+	cursor:pointer;
+}
+.danhsach-item
+{
+	overflow:hidden;
+	padding:6px 15px;
+	margin:0px;
+	background-color: rgb(255, 255, 254);
+	list-style:none;
+	border-bottom:1px solid rgb(108, 134, 114);
+	-webkit-transition: all 100ms ease-in-out;
+	-moz-transition: all 100ms ease-in-out;
+	-ms-transition: all 100ms ease-in-out;
+	-o-transition: all 100ms ease-in-out;
+	transition: all 100ms ease-in-out;
+	border-radius: 5px;
+}
+input[type="search"]
+{
+	padding: 5px;
+	border-radius: 5px;
+}
+.detail-list ul li
+{
+	padding: 5px;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+.danhsach-chitiet
+{
+	overflow:hidden;
+}
+.danhsach-subitem
+{
+	overflow:hidden;
+	background-color:rgb(196, 212, 175);
+	display:none;
+	
+	-webkit-box-shadow: inset 0px 0px 50px -5px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0px 0px 50px -5px rgba(0, 0, 0, 0.3);
+}
+.danhsach-subitem-header
+{
+	overflow:hidden;
+	padding:6px 15px 6px 75px;
+	margin:0px;
+	font-weight:bold;
+	
+	list-style:none;
+	border-bottom:1px dashed rgb(145, 166, 150);
+}
+.danhsach-subitem-item
+{
+	overflow:hidden;
+	padding:4px 15px 4px 75px;
+	margin:0px;
+	
+	list-style:none;
+	border-bottom:1px dashed rgb(145, 166, 150);
+}
+.editField
+{
+	margin:0;
+	width:200px;
+	border:none;
+	background-color:transparent;
+	font-family:"segoe ui semilight", "segoe ui", tahoma, arial;
+	font-size:14px;
+}
+.danhsach-item:hover
+{
+	background-color:rgb(196, 212, 175);
+}
+.editField-Focus
+{
+	border:1px solid rgb(196, 212, 175);
+	background-color:#FFF;
+	padding:0 4px;
+}
+.Xem , .Xoa ,.Them
+{
+	font-weight:bold;
+	margin:5px;
+	padding: 5px;
+	border-radius: 5px;
+	color: #FFF;
+}
+.Xoa
+{
+	background-color: red;
+}
+.Xem
+{
+	background-color: aqua;
+}
+.Them
+{
+	background-color:#3b9b61;
+}
+.Xoa:hover, .Xoa:focus, .Xem:hover , .Xem:focus, .Them:focus, .Them:hover
+{
+	outline:2px groove rgb(217, 23, 29);
+}
+.danhsach-navigation
+{
+	overflow:hidden;
+	margin-top:10px;
+	padding:2px;
+	text-align:right;
+}
+.danhsach-navigation label
+{
+	margin:0 10px;
+}
