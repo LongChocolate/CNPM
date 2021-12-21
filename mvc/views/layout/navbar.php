@@ -27,15 +27,33 @@
                             </li>
                         </ul>
                     </li>
-                    <li class='navbar-item user-wrap'>
-                        <a  onclick='form(0)' href='#' class='navbar-item-link'>
+                    <li class='navbar-item navbar-noti user-wrap'>
+                        <a  href='#' class='navbar-item-link'>
                             <div class='user'>
                                 <img src='asset/image/avatar/user-avatar.png' alt='' class='user-ava'>
                                 <div class='user-info'>
-                                    <div class='user-log'>Account</div>
+                                    <div class='user-log'><?= $_SESSION['hoten'] ?></div>
                                 </div>
                             </div>
                         </a>
+                        <ul class='navbar-noti-list' >
+                            <li class='navbar-noti-item '>
+                                <a href='?controller=nhanvien&action=view' class='navbar-item-link'>
+                                    <div class='navbar-noti-info'>
+                                        <div class='navbar-noti-head'>Thông tin cá nhân</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class='navbar-noti-item '>            
+                                <a href='logout.php' class='navbar-item-link'>
+                                    <div class='navbar-noti-info'>
+                                        <div class='navbar-noti-head'>Đăng Xuất</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="navbar-item">
                     </li>
                 </ul>
             </div>

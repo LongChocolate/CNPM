@@ -1,4 +1,11 @@
 <?php
+	session_start();
+	require_once('function.php');
+	if (!isset($_SESSION['users'])) {
+		header('Location: login.php');
+		exit();
+	}
+	
 	if (isset($_GET['controller']))
 	{
 		$controller = $_GET['controller'];
@@ -15,9 +22,16 @@
 	}
 	else
 	{
-		$controller = 'admin';
+		$controller = strtolower(convert_vi_to_en($_SESSION['loai']));
 		$action = 'index';
-		$class = 'Staff';
+		if($controller == 'quanli')
+		{
+			$class = 'nhanvien';
+		}
+		if($controller == 'nhanvienbanhang')
+		{
+			$class = 'sanpham';
+		}
 	}
 	require_once('route.php');
 ?>

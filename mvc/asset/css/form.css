@@ -1,0 +1,15 @@
+.form-message
+{
+    color:red;
+    font-size: 15px;
+    margin:2px;
+}
+#thongtin
+{
+    display: none;
+}
+
+#thongtin:hover
+{
+    display: block;
+}

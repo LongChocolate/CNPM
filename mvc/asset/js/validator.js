@@ -24,6 +24,7 @@ function Validator(options)
 			errorElement.innerText = '';
 			inputElement.parentElement.classList.remove('invalid');
 		}
+		return !!errorMessage;
 	}
 
 	let formElement = document.querySelector(options.form);
@@ -34,14 +35,24 @@ function Validator(options)
 		{
 			// Ngăn chặn chức năng cơ bản
 			e.preventDefault();
-
+			var isValid = true;
 			// hiện thị tất cả lỗi
 			options.rules.forEach(function(rule)
 			{
 				var inputElement = formElement.querySelector(rule.selector)
-				validate(inputElement,rule);
-
+				var is = validate(inputElement,rule);
+				console.log(is)
+				if(is)
+				{
+					isValid = false;		
+				}
+				
 			});
+			
+			if(isValid)
+			{
+				formElement.submit();
+			}
 		}
 
 		// kiểm tra và hiện thị lỗi trong input
