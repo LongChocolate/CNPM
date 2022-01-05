@@ -12,21 +12,26 @@
             require_once('views/layout/template.php');
             require_once('views/layout/navbar.php');
             require_once('views/layout/menuBar.php');  
-            require_once('views/layout/modal.php');
-            require_once('views/message/question.php');
-            require_once('views/message/announce.php');
+            
+            
         }
         function title($title,$lists)
         {
             foreach($lists as $list);
             require_once('views/' .$this->controller. '/title.php');   
         }
-        function list($data,$view)
+        function list($data,$view,$select = array())
         {
             extract($view);
             extract($data);
+            extract($select);
             
             ob_start();
+            if($controller == "quanli")
+            {
+                require_once('views/'.$this->controller.'/model'.$this->class.'.php');
+            }
+            require_once('views/layout/modal.php');
             require_once('views/' .$this->controller. '/list'.$this->class.'.php');
             $list = ob_get_clean();
             

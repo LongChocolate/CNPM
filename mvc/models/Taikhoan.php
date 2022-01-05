@@ -35,7 +35,7 @@ class Taikhoan{
         $this->check = $check;
     }
 
-    public function register($SDT,$Password,$Loai)
+    public static function register($SDT,$Password,$Loai)
     {
         
         $conn = Connection::open_database();
@@ -53,7 +53,23 @@ class Taikhoan{
         return array('code'=> 0,'error' =>"Tạo tài khoản thành công");
         
     }
-    public function login($SDT,$Password)
+
+    public static function edit($SDT,$Loai)
+    {
+        $sql = "update taikhoan
+                set Loai= ?
+                where SDT = ?";
+        $conn = Connection::open_database();
+        $stm = $conn->prepare($sql);
+        $stm->bind_param('ss',$SDT,$Loai);
+        if(!$stm->execute())
+        {
+            return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");
+        }
+        return array('code'=> 0,'error' =>"Cập nhật thành công");
+    }
+
+    public static function login($SDT,$Password)
     {
         $conn = Connection::open_database();
         $sql = "select MaNV,nhanvien.SDT,Password,Loai,actived,token,HoTen 
@@ -79,7 +95,7 @@ class Taikhoan{
         return array('code'=> 0,'error' =>$data);
     }
 
-    public function getAccount($Loai)
+    public static function getAccount($Loai)
     {
         $conn = Connection::open_database();
         $sql = "select * from users where Loai = ?";

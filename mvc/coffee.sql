@@ -2,12 +2,12 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 06, 2021 lúc 06:33 PM
--- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.4.10
+-- Host: 127.0.0.1
+-- Generation Time: Jan 03, 2022 at 07:21 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO"; 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,210 +18,248 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `coffee`
+-- Database: `coffee`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category`
+-- Table structure for table `category`
 --
-create database coffee;
+
 CREATE TABLE `category` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `check` bit(1) NOT NULL,
-  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `category`
+-- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `description`, `image`, `check`, `created_at`, `updated_at`) VALUES
-(1, 'Dessert', 'Món tráng miệng', 'dessert.jpeg', b'1', NULL, NULL),
-(2, 'Drink', 'Nước uống', 'drink.jpeg', b'1', NULL, NULL);
+(1, 'Dessert', 'Thưởng thức cái món tráng đến từ Châu Á', 'images/category/trangmiengindex.jpeg', b'0', '2021-10-22 01:56:29', '2021-10-22 01:56:29'),
+(2, 'Drink', 'Thưởng thức cái thức uống đến từ Châu Á', 'images/category/drinkindex.jpeg', b'0', '2021-10-22 01:56:29', '2021-10-22 01:56:29');
 
-Chỗ `check` chỉ gần ghi b'1' như tui là dc chỗ này kiểm tra là trạng thái hoạt động của loại đó thoi
-chỗ `description` bỏ trống cũng dc
-chỗ `image` kiếm cho tui tấm hình của loại đó xong đặt tên giống tên loại như tui ví dụ
-
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product`
+-- Table structure for table `chitiethoadon`
 --
 
-CREATE TABLE `product` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `cost` int(11) NOT NULL,
+CREATE TABLE `chitiethoadon` (
+  `MaHD` int(10) UNSIGNED NOT NULL,
+  `MaSP` int(10) UNSIGNED NOT NULL,
+  `SoLuong` int(50) NOT NULL,
+  `Gia` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `chitiethoadon`
+--
+
+INSERT INTO `chitiethoadon` (`MaHD`, `MaSP`, `SoLuong`, `Gia`) VALUES
+(1, 1, 3, 45000),
+(1, 2, 3, 45000),
+(1, 3, 2, 60000),
+(1, 11, 1, 35000),
+(2, 1, 1, 15000),
+(2, 2, 2, 30000),
+(2, 3, 1, 30000),
+(2, 6, 1, 30000),
+(2, 11, 2, 70000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hoadon`
+--
+
+CREATE TABLE `hoadon` (
+  `MaHD` int(10) UNSIGNED NOT NULL,
+  `TenNV` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NgayTao` date NOT NULL,
+  `TongTien` float NOT NULL,
+  `TrangThai` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hoadon`
+--
+
+INSERT INTO `hoadon` (`MaHD`, `TenNV`, `NgayTao`, `TongTien`, `TrangThai`) VALUES
+(1, 'Hoàng Đức', '2021-12-21', 185000, 'Đã thanh toán'),
+(2, 'Hoàng Đức', '2021-12-21', 175000, 'Đã thanh toán');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nhanvien`
+--
+
+CREATE TABLE `nhanvien` (
+  `MaNV` int(10) UNSIGNED NOT NULL,
+  `SDT` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `HoTen` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Anh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `GioiTinh` tinyint(1) NOT NULL,
+  `CMND` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `nhanvien`
+--
+
+INSERT INTO `nhanvien` (`MaNV`, `SDT`, `HoTen`, `Anh`, `GioiTinh`, `CMND`, `created_at`, `updated_at`) VALUES
+(1, '0123456755', 'Xuân Kim Long', 'http://localhost:8888/Coffee/cnpm-coffee/mvc/asset/images/douong/Cocktail-buoi-cay.jpg', 0, 123456, '2021-10-22 01:56:29', '2022-01-03 06:16:00'),
+(9, '51900760', 'Hoàng Đức', 'http://localhost:8888/Coffee/cnpm-coffee/mvc/asset/image/avatar/user-avatar.png', 0, 348923138, '2021-12-14 15:39:05', '2021-12-14 15:39:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sanpham`
+--
+
+CREATE TABLE `sanpham` (
+  `MaSP` int(10) UNSIGNED NOT NULL,
+  `Ten` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Anh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `SoLuong` int(11) NOT NULL,
+  `Gia` int(11) NOT NULL,
   `category_id` int(10) UNSIGNED NOT NULL,
-  `check` bit(1) NOT NULL,
-  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `product`
+-- Dumping data for table `sanpham`
 --
 
-INSERT INTO `product` (`id`, `name`, `image`, `description`, `cost`, `category_id`, `check`, `created_at`, `updated_at`) VALUES
-(1, 'Capuchino', 'images/douong/Capuchino.jpg', 'Capuchio nóng', 350000, 1, b'1', NULL, NULL),
-(2, 'Espresso', 'images/douong/Espresso.jpg', 'Espresso nóng', 35000, 1, b'1', NULL, NULL);
+INSERT INTO `sanpham` (`MaSP`, `Ten`, `Anh`, `SoLuong`, `Gia`, `category_id`, `created_at`, `updated_at`) VALUES
+(1, 'Cocktail bưởi cay', 'asset/image/sanpham/Cocktail-buoi-cay.jpg', 9, 15000, 2, '2021-10-22 01:56:29', '2022-01-02 19:26:11'),
+(2, 'Nước ép cam', 'asset/image/sanpham/Nuoc-ep-cam.jpg', 21, 15000, 2, '2021-10-22 01:56:29', '2022-01-02 19:26:11'),
+(3, 'Sinh tố dâu', 'asset/image/sanpham/Sinh-to-dau.jpg', 15, 30000, 2, '2021-10-22 01:56:29', '2022-01-02 19:26:11'),
+(6, 'Nước ép cherry', 'asset/image/sanpham/Nuoc-ep-cherry.jpg', 16, 30000, 2, '2021-10-22 01:56:29', '2022-01-02 19:26:11'),
+(9, 'Capuchino', 'asset/image/sanpham/Capuchino.jpg', 4, 350000, 2, '2021-10-22 01:56:29', '2022-01-02 19:26:11'),
+(11, 'Espresso', 'asset/image/sanpham/Espresso.jpg', 7, 35000, 2, '2021-10-22 01:56:29', '2022-01-02 19:26:11'),
+(20, 'Trà Đào', 'asset/image/sanpham/tra-dao.jpg', 50, 17000, 2, '2022-01-02 09:03:33', '2022-01-02 19:26:11');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `staff`
+-- Table structure for table `taikhoan`
 --
 
-CREATE TABLE `staff` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `sdt` varchar(12) COLLATE utf8_unicode_ci NOT NULL UNIQUE,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL, 
-  `address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-INSERT INTO `staff` (`id`,`sdt` ,`name`, `image`, `address`) VALUES
-(1, '0931427718','Xuân Kim Long', 'images/douong/Cocktail-buoi-cay.jpg', '122 Đường 345'),
-(2, '1345687864','Linh Truongg' ,'images/douong/Nuoc-ep-cam.jpg', '122 Đường 346');
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `user`
---
-
-CREATE TABLE `user` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `sdt` varchar(12) COLLATE utf8_unicode_ci NOT NULL UNIQUE,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `users`
---
-
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `sdt` varchar(12) COLLATE utf8_unicode_ci NOT NULL UNIQUE,
-  `password` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `loainguoidung_id` int(10) UNSIGNED NOT NULL,
-  `check` bit(1) NOT NULL,
-  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE `taikhoan` (
+  `SDT` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `Password` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Loai` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `actived` tinyint(1) NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bả'ng `users`
+-- Dumping data for table `taikhoan`
 --
 
-INSERT INTO `users` (`id`, `sdt`, `loainguoidung_id`, `check`, `created_at`, `updated_at`) VALUES
-(1,'01234567', 0, b'1', NULL, NULL),
-(2, 'admin', 1, b'1', NULL, NULL),
-(3, '12345678', 1, b'1', NULL, NULL),
-(4, '123456789', 1, b'1', NULL, NULL);
+INSERT INTO `taikhoan` (`SDT`, `Password`, `Loai`, `actived`, `token`, `created_at`, `updated_at`) VALUES
+('0123456766', '$2y$10$EwkbNz9opUbPDXV9XoxZfuvLXekG4/CWDYyRD6M/VhC49Jy55WToG', 'Quản lí', 0, 'null', '2021-10-22 01:56:29', '2022-01-03 06:15:39'),
+('51900760', '$2y$10$9VeV.x.OfDC8Xtl6aT6Sg.S7BW.wz9ToI/oAFlG1tjMb21.a5K9K6', 'Nhân viên bán hàng', 0, '2dd9dd6e4772e2bbe78c2186eca5cf3d', '2021-12-14 15:39:05', '2021-12-14 15:39:05');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `product`
+-- Indexes for table `chitiethoadon`
 --
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`),
+ALTER TABLE `chitiethoadon`
+  ADD PRIMARY KEY (`MaHD`,`MaSP`),
+  ADD KEY `chitiethoadon_sanpham_id` (`MaSP`);
+
+--
+-- Indexes for table `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD PRIMARY KEY (`MaHD`);
+
+--
+-- Indexes for table `nhanvien`
+--
+ALTER TABLE `nhanvien`
+  ADD PRIMARY KEY (`MaNV`),
+  ADD UNIQUE KEY `sdt` (`SDT`);
+
+--
+-- Indexes for table `sanpham`
+--
+ALTER TABLE `sanpham`
+  ADD PRIMARY KEY (`MaSP`),
   ADD KEY `product_category_id` (`category_id`);
 
 --
--- Chỉ mục cho bảng `staff`
+-- Indexes for table `taikhoan`
 --
-ALTER TABLE `staff`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `taikhoan`
+  ADD PRIMARY KEY (`SDT`) USING BTREE,
+  ADD UNIQUE KEY `sdt` (`SDT`);
 
 --
--- Chỉ mục cho bảng `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `product`
+-- AUTO_INCREMENT for table `nhanvien`
 --
-ALTER TABLE `product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `nhanvien`
+  MODIFY `MaNV` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT cho bảng `staff`
+-- AUTO_INCREMENT for table `sanpham`
 --
-ALTER TABLE `staff`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `sanpham`
+  MODIFY `MaSP` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT cho bảng `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `product`
+-- Constraints for table `chitiethoadon`
 --
-ALTER TABLE `product`
+ALTER Table `taikhoan`
+  ADD CONSTRAINT `taikhoan_nhanvien_sdt` FOREIGN KEY (`SDT`) REFERENCES `nhanvien` (`SDT`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
+
+ALTER TABLE `chitiethoadon`
+  ADD CONSTRAINT `chitiethoadon_hoadon_id` FOREIGN KEY (`MaHD`) REFERENCES `hoadon` (`MaHD`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `chitiethoadon_sanpham_id` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sanpham`
+--
+ALTER TABLE `sanpham`
   ADD CONSTRAINT `product_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_user_sdt` FOREIGN KEY (`sdt`) REFERENCES `users` (`sdt`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
-
-ALTER TABLE `user`
-  ADD CONSTRAINT `staff_user_sdt` FOREIGN KEY (`sdt`) REFERENCES `users` (`sdt`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -55,15 +55,33 @@
             $this->CMND = $CMND;
         }
        
-        public static function getOne($SDT)
+        public static function getOne($MaNV)
         {
             $sql = "select MaNV,nhanvien.SDT,nhanvien.HoTen,Anh,Loai,GioiTinh,CMND,nhanvien.created_at,nhanvien.updated_at from nhanvien,taikhoan where MaNV = ? and nhanvien.SDT = taikhoan.SDT ";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
-            $stm->bind_param('i',$SDT);
+            $stm->bind_param('i',$MaNV);
             if(!$stm->execute())
             {
                 return array('code' => 1,'error'=>'Không tìm thấy Nhân Viên này');
+            }
+            $result = $stm->get_result();
+            $data = $result->fetch_assoc();
+            return $data;
+        }
+
+        public static function getLast()
+        {
+            $sql = "select *,Loai
+            from nhanvien,taikhoan
+            where nhanvien.SDT = taikhoan.SDT
+            ORDER BY MaNV DESC
+            limit 1";
+            $conn = Connection::open_database();
+            $stm = $conn->prepare($sql);
+            if(!$stm->execute())
+            {
+                return null;
             }
             $result = $stm->get_result();
             $data = $result->fetch_assoc();
@@ -106,11 +124,11 @@
         public static function edit($object)
         {
             $sql = "update nhanvien 
-                    set HoTen = ?,Anh = ? ,GioiTinh = ?, CMND = ?
+                    set SDT= ?,HoTen = ?,Anh = ? ,GioiTinh = ?, CMND = ?
                     where MaNV = ?";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
-            $stm->bind_param('ssiii',$object->HoTen,$object->Anh,$object->GioiTinh,$object->CMND,$object->MaNV);
+            $stm->bind_param('sssiii',$object->SDT,$object->HoTen,$object->Anh,$object->GioiTinh,$object->CMND,$object->MaNV);
             if(!$stm->execute())
             {
                 return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");
@@ -128,6 +146,8 @@
                 return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");
             }
             return array('code'=> 0,'error' =>"Thêm Thành công");
+            
+            
         }
     }
 ?>

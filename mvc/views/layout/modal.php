@@ -1,159 +1,3 @@
-
-<div class="modal fade " id="editNhanvien" tabindex="-1" role="dialog" aria-labelledby="payByCashLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content ">
-            <div class="modal-header">
-            <h5 class="modal-title" id="payByCashLabel">Thông tin chi tiết</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <form  method='post' >
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group  col-md-6 col-s-12">
-                            <label for="name"></label>
-                            <img id="Anh" src="" alt="Avatar" width="300px" height="400px">
-                        </div>
-                        <div class="form-group  col-md-6 col-s-12">
-                            <div class="form-group">
-                                <label  for="id">Mã Nhân Viên</label>
-                                <input disabled class="form-control" id="MaNV" name="id" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="sdt">Số điện thoại</label>
-                                <input class="form-control" id="SDT" name="sdt" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Họ Tên</label>
-                                <input class="form-control" id="HoTen" name="name" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Giới Tính</label>
-                                <input class="form-control" id="GioiTinh" name="gioitinh" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="address">CMND</label>
-                                <input class="form-control" id="CMND" name="cmnd" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Loại</label>
-                                <input class="form-control" id="Loai"  type="text" >
-                            </div>                 
-                        </div>
-                    </div> 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button onclick="onSubmitEdit('quanli','edit','Nhanvien')" type="button" class="btn btn-primary" >Xác nhận</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade " id="createNhanvien" tabindex="-1" role="dialog" aria-labelledby="payByCashLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content ">
-            <div class="modal-header">
-            <h5 class="modal-title" id="payByCashLabel">Thông tin chi tiết</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <form  method='post' >
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group  col-md-6 col-s-12">
-                            <label for="name"></label>
-                            <img id="Anh" src="" alt="Avatar" width="300px" height="400px">
-                        </div>
-                        <div class="form-group  col-md-6 col-s-12">
-                            <div class="form-group">
-                                <label  for="id">Mã Nhân Viên</label>
-                                <input disabled class="form-control" id="MaNV" name="id" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="sdt">Số điện thoại</label>
-                                <input class="form-control" id="SDT" name="sdt" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Họ Tên</label>
-                                <input class="form-control" id="HoTen" name="name" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Giới Tính</label>
-                                <input class="form-control" id="GioiTinh" name="gioitinh" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="address">CMND</label>
-                                <input class="form-control" id="CMND" name="cmnd" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Loại</label>
-                                <input class="form-control" id="Loai"  type="text" >
-                            </div>                 
-                        </div>
-                    </div> 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button onclick="onSubmitCreate('quanli','create','Nhanvien')" type="button" class="btn btn-primary" >Tạo</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade " id="Sanpham" tabindex="-1" role="dialog" aria-labelledby="payByCashLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content ">
-            <div class="modal-header">
-            <h5 class="modal-title" id="payByCashLabel">Thông tin chi tiết</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <form onsubmit='return onSubmitEdit()' method='post' >
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group  col-md-6 col-s-12">
-                            <label for="name"></label>
-                            <img id="Anh" src="" alt="Avatar" width="300px" height="400px">
-                        </div>
-                        <div class="form-group  col-md-6 col-s-12">
-                            <div class="form-group">
-                                <label  for="id">Mã Sản Phẩm</label>
-                                <input disabled class="form-control" id="MaSP" name="id" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="sdt">Tên</label>
-                                <input class="form-control" id="Ten" name="sdt" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Số Lượng</label>
-                                <input class="form-control" id="SoLuong" name="name" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Giá</label>
-                                <input class="form-control" id="Gia" name="gioitinh" type="text" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Loại</label>
-                                <input class="form-control" id="category_id"  type="text" >
-                            </div>                 
-                        </div>
-                    </div> 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Xác nhận</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="payByCash" tabindex="-1" role="dialog" aria-labelledby="payByCashLabell" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -211,5 +55,40 @@
         </div>
         </div>
     </div>
-
-
+    <div class="modal fade " id="ThongBaoModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+              <h5 class="modal-title" >Thông Báo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p id='Content-Thongbao'></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>  
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="question" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc muốn xoá ?</p>
+      </div>
+      <div  class="modal-footer">
+        <button onclick='onSubmit()' type="button" class="btn btn-primary">Chắc chắn</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

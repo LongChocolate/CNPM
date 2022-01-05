@@ -36,8 +36,24 @@
             }
             $result = $stm->get_result();
             $data = $result->fetch_assoc();
-            return array('code' => 0, 'error' =>$data);
+            return $data;
+        }
 
+        public static function getLast()
+        {
+            $sql = "select *
+            from sanpham
+            ORDER BY sanpham.MaSP DESC
+            limit 1";
+            $conn = Connection::open_database();
+            $stm = $conn->prepare($sql);
+            if(!$stm->execute())
+            {
+                return null;
+            }
+            $result = $stm->get_result();
+            $data = $result->fetch_assoc();
+            return $data;
         }
         public static function getAll()
         {
@@ -73,11 +89,11 @@
         public static function edit($object)
         {
             $sql = "update sanpham 
-                    set Ten = ?,Anh = ? ,SoLuong = ?, Gia = ?
+                    set Ten = ?,Anh = ? ,SoLuong = ?, Gia = ?,category_id = ?
                     where MaSP = ?";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
-            $stm->bind_param('ssiii',$object[2],$object[3],$object[4],$object[5],$object[0]);
+            $stm->bind_param('ssiiii',$object->Ten,$object->Anh,$object->SoLuong,$object->Gia,$object->category_id,$object->MaSP);
             if(!$stm->execute())
             {
                 return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");
@@ -86,15 +102,16 @@
         }
         public static function create($object)
         {
-            $sql = "insert into nhanvien(`Ten`,`Anh`,`SoLuong`,`Gia`,`category_id`) values(?,?,?,?,?)";
+            $sql = "insert into sanpham(`Ten`,`Anh`,`SoLuong`,`Gia`,`category_id`) values(?,?,?,?,?)";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
-            $stm->bind_param('isssiis',$object[1],$object[2],$object[3],$object[4],$object[5]);
+            $stm->bind_param('ssiii',$object->Ten,$object->Anh,$object->SoLuong,$object->Gia,$object->category_id);
             if(!$stm->execute())
             {
                 return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");
             }
-            return array('code'=> 0,'error' =>"Thêm Thành công");
+            $data = Sanpham::getLast();
+            return array('code'=> 0,'error' =>"Thêm Thành công",'data' =>$data);
         }
 
     }

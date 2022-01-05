@@ -1,36 +1,79 @@
 let state;
+let button;
 function onSubmitEdit(controller,action,clas)
 {
     var modal = document.getElementById(action+clas);
     var form = modal.querySelector('form');
-    let data = {};
+    var data = {};
     for(let i = 0; i < state.length ; i++ )
     {
         if(state[i] == "Anh")
         {
-            data[state[i]] = (modal.querySelector('#' + state[i]).src);
+            data[state[i]] = (modal.querySelector('#' + state[i]).src).slice(45);
+        }
+        else if(state[i] == "category_id" || state[i] == "Loai")
+        {
+            var inpt = form.querySelector('#' + state[i]);
+            data[state[i]] = inpt.options[inpt.selectedIndex].value;
+        }
+        else if(state[i] == "GioiTinh")
+        {
+            inpt = form.querySelectorAll('input[name='+ state[i] + ']');
+            for(var ip of inpt)
+            {
+                if(ip.checked)
+                {
+                    data[state[i]] = ip.value;
+                }
+            }
         }
         else{
             data[state[i]] = (form.querySelector('#' + state[i]).value);
         }
     }
-    
     const xhr = new XMLHttpRequest();
-    xhr.open('GET','index.php?controller=' + controller + '&action=' +action + '&class=' + clas + '&object=' + JSON.stringify(data));
+    xhr.open('GET','index.php?controller=' + controller + '&action=edit' + '&class=' + clas + '&object=' + JSON.stringify(data));
     xhr.send();
     xhr.addEventListener('load',e =>{
         if (xhr.readyState === 4 && xhr.status ===200)
         {
             let response = xhr.responseText;
-            data = JSON.parse(response);
-
-
+            response = JSON.parse(response);
             var mess = document.getElementById('ThongBaoModal');
             var content = mess.querySelector('#Content-Thongbao');
-            content.innerHTML = data.error;
+            content.innerHTML = response.error;         
+            data = response.data
+         
             $('#'+action+clas).modal('hide');
             $('#ThongBaoModal').modal('toggle');
-            
+            if(response.code == 0)
+            {
+                if (clas == "Nhanvien"){    
+                button.parentElement.parentElement.innerHTML = `
+                <li style='width:10%;'>${data['MaNV']}</li>
+                <li style='width:15%;'>${data['SDT']}</li>
+                <li style='width:20%;'>${data['HoTen']}</li> 
+                <li style='width:20%;'>${data['GioiTinh'] == "0" ? "Nam" : "Nữ" }</li>
+                <li style='width:15%;'>${data['Loai']}</li>	
+                <li style='width:20%;'>
+                    <button  onclick="view('${data.MaNV}','quanli','view','${clas}',this)"  data-toggle='modal' data-target='#viewNhanvien' class='Xem' id='btnSua' >Xem</button>
+                    <button  onclick="message('${data.MaNV}','quanli','delete','${clas}',this)" data-toggle='modal' data-target='#question'  class='Xoa' name='delete' id='btnXoa' >Xoá</button>
+                </li>`   
+                }
+                else if(clas == "Sanpham")
+                {
+                    button.parentElement.parentElement.innerHTML = `
+                    <li style='width:10%;'>${data['MaSP']}</li>
+                    <li style='width:15%;'>${data['Ten']}</li>
+                    <li style='width:20%;'>${data['SoLuong']}</li>
+                    <li style='width:20%;'>${data['Gia']}</li>
+                    <li style='width:15%;'>${data['category_id']}</li>
+                    <li style='width:20%;'>
+                        <button  onclick="view('${data.MaSP}','quanli','view','${clas}',this)"   data-toggle='modal' data-target='#viewSanpham' class='Xem' id='btnSua' >Xem</button>
+                        <button  onclick="message('${data.MaSP}','quanli','delete','${clas}',this)"   class='Xoa'  id='btnXoa' >Xoá</button>
+                    </li>`    
+                }
+            }
         }
     });
 }
@@ -44,48 +87,85 @@ function onSubmitCreate(controller,action,clas)
         if (xhr.readyState === 4 && xhr.status ===200)
         {
             let response = xhr.responseText;
+        
             state = JSON.parse(response);
-            let data = {};
+            var data = {};
             var modal = document.getElementById(action+clas);
             var form = modal.querySelector('form');
             for(let i = 0; i < state.length ; i++ )
             {
                 if(state[i] == "Anh")
                 {
-                    data[state[i]] = (modal.querySelector('#' + state[i]).src);
+                    data[state[i]] = (modal.querySelector('#' + state[i]).src).slice(45);
+                }
+                else if(state[i] == "category_id" || state[i] == "Loai")
+                {
+                    var inpt = form.querySelector('#' + state[i]);
+                    
+                    data[state[i]] = inpt.options[inpt.selectedIndex].value;
+                    
+                }
+                else if(state[i] == "GioiTinh")
+                {
+                    inpt = form.querySelectorAll('input[name='+ state[i] + ']');
+                    for(var ip of inpt)
+                    {
+                        if(ip.checked)
+                        {
+                            data[state[i]] = ip.value;
+                        }
+                    }
                 }
                 else{
+                   
                     data[state[i]] = (form.querySelector('#' + state[i]).value);
                 }
             }
-
             const xr = new XMLHttpRequest();
             xr.open('GET','index.php?controller=' + controller + '&action=' +action + '&class=' + clas + '&object=' + JSON.stringify(data));
             xr.send();
             xr.addEventListener('load',e =>{
 
                 let response = xr.responseText;
+                console.log(response)
                 response = JSON.parse(response);
                 var mess = document.getElementById('ThongBaoModal');
                 var content = mess.querySelector('#Content-Thongbao');
                 content.innerHTML = response.error;
+             
+                data = response.data;
                 $('#'+action+clas).modal('hide');
                 $('#ThongBaoModal').modal('toggle');
                 if(response.code == 0)
                 {
                     let ul = document.createElement('ul');
-                    ul.innerHTML = `<ul class='danhsach-item'>
-                                <li style='width:10%;'>${data['MaNV']}</li>
-                                <li style='width:15%;'>${data['SDT']}</li>
-                                <li style='width:20%;'>${data['HoTen']}</li> 
-                                <li style='width:20%;'>${data['GioiTinh']}</li>
-                                <li style='width:20%;'>${data['Loai']}</li>	
-                                <li style='width:25%;'>
-                                    <button  onclick='view(${data['MaNV']},'quanli','view',$class)'   data-toggle='modal' data-target='#editNhanvien' class='Xem' id='btnSua' >Xem</button>
-                                    <button  onclick='message(${data['MaNV']},'quanli','delete',$class,this)' data-toggle='modal' data-target='#question'  class='Xoa' name='delete' id='btnXoa' >Xoá</button>
-                                </li>	                              
-                            </ul>`
-                    ul.setAttribute('class','danhsach-item');
+                    ul.className = "danhsach-item";
+                    if (clas == "Nhanvien")
+                    {
+                        ul.innerHTML = `
+                                    <li style='width:10%;'>${data['MaNV']}</li>
+                                    <li style='width:15%;'>${data['SDT']}</li>
+                                    <li style='width:20%;'>${data['HoTen']}</li> 
+                                    <li style='width:20%;'>${data['GioiTinh']  == "0" ? "Nam" : "Nữ"}</li>
+                                    <li style='width:15%;'>${data['Loai']}</li>	
+                                    <li style='width:20%;'>
+                                        <button  onclick="view('${data.MaNV}','quanli','view','${clas}',this)"  data-toggle='modal' data-target='#viewNhanvien' class='Xem' id='btnSua' >Xem</button>
+                                        <button  onclick="message('${data.MaNV}','quanli','delete','${clas}',this)" data-toggle='modal' data-target='#question'  class='Xoa' name='delete' id='btnXoa' >Xoá</button>
+                                    </li>	                              
+                                `
+                    }
+                    else
+                    {
+                        ul.innerHTML = `<li style='width:10%;'>${data['MaSP']}</li>
+                                        <li style='width:15%;'>${data['Ten']}</li>
+                                        <li style='width:20%;'>${data['SoLuong']}</li>
+                                        <li style='width:20%;'>${data['Gia']}</li>
+                                        <li style='width:15%;'>${data['category_id']}</li>
+                                        <li style='width:20%;'>
+                                            <button  onclick="view('${data.MaSP}','quanli','view','${clas}',this)"   data-toggle='modal' data-target='#viewSanpham' class='Xem' id='btnSua' >Xem</button>
+                                            <button  onclick="message('${data.MaSP}','quanli','delete','${clas}',this)"   class='Xoa'  id='btnXoa' >Xoá</button>
+                                        </li>`
+                    } 
                     let body = document.querySelector('.body-list');
                     body.appendChild(ul);
                 }
@@ -96,8 +176,9 @@ function onSubmitCreate(controller,action,clas)
     });
 }
 
-function view(object ,controller,action,clas)
+function view(object ,controller,action,clas,ths)
 {
+    button = ths;
     const xhr = new XMLHttpRequest();
     xhr.open('GET','index.php?controller='+controller + '&action=' + action + '&class=' + clas + '&id=' + object);
     xhr.send();
@@ -107,8 +188,8 @@ function view(object ,controller,action,clas)
             if (xhr.readyState === 4 && xhr.status ===200)
             {
                 let response = xhr.responseText;
-                response = JSON.parse(response);
-
+                
+                response = JSON.parse(response)
                 var data = response.data;
                 state = response.attribute;
                 var modal = document.getElementById(action+clas);
@@ -116,7 +197,7 @@ function view(object ,controller,action,clas)
                 for(let i = 0; i < state.length ; i++ )
                 {
                     let inpt = form.querySelector('#' + state[i]);
-                    
+                   
                     if(state[i] == "Anh")
                     {
                         inpt.setAttribute("src",data[state[i]]);
@@ -128,7 +209,25 @@ function view(object ,controller,action,clas)
                     }
                     else if (state[i]  == "GioiTinh")
                     {
-                        inpt.setAttribute("value",data[state[i]]);
+                        inpt = form.querySelectorAll('input[name='+ state[i] + ']');
+                        
+                        if(data[state[i]] == "0")
+                        {
+                            inpt[0].checked = true
+                        }
+                        else
+                        {
+                            inpt[1].checked =true
+                        }
+                    }
+                    else if (state[i] == "category_id" )
+                    {
+                        inpt.options[data[state[i]]-1].selected = "selected"
+                    }
+                    else if(state[i] == "Loai")
+                    {
+                        var select = data[state[i]] == "Quản lí"? 0 : 1;
+                        inpt.options[select].selected = "selected"
                     }
                     else
                     {

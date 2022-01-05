@@ -2,6 +2,7 @@
     require_once('controllers/base_controller.php');
     require_once('models/Nhanvien.php');
     require_once('models/Sanpham.php');
+    require_once('models/Danhmuc.php');
     require_once('function.php');
 
     class QuanliController extends BaseController{ 
@@ -10,7 +11,6 @@
             $this->controller = 'quanli';
         }
         public function index($action,$class){
-                       
             $this->action = $action;
             $this->ratio = '12';
             $this->class = $class;
@@ -19,11 +19,24 @@
                             'class'=>$this->class,
                             'controller'=>$this->controller);
             $obj = $class::getAll();
+           
             $data = array($class => $obj);
             $this->render();
-            $this->title($this->class,
-                        array($this->list($data,$view))
-                    );
+            if ($class == "Sanpham")
+            {
+                $select = Danhmuc::getAll();
+                $this->title($this->class,
+                             array($this->list($data,$view,$select))
+                );
+            }
+            else
+            {
+                $this->title($this->class,
+                    array($this->list($data,$view))
+                );
+
+            }
+
 
         }   
 
@@ -38,16 +51,11 @@
         {
             $obj = json_decode($_GET['object']);
             $data = $class::edit($obj);
-            echo json_encode($data);
-        }
-        public function create($action,$class)
-        {
-            $obj = json_decode($_GET['object']);
-            $data = $class::create($obj);
             if($class == "Nhanvien")
             {
-                $account = Taikhoan::register($obj->SDT,$obj->SDT,$obj->Loai);
+                $account = Taikhoan::edit($obj->SDT,$obj->Loai);
             }
+            $data['data'] = $obj;
             echo json_encode($data);
         }
         public function view($action,$class)
@@ -58,6 +66,27 @@
             $response = array('data' => $obj, 'attribute' =>$attri);
             echo json_encode($response);
         }
+        public function create($action,$class)
+        {
+            $obj = json_decode($_GET['object']);
+            $data = $class::create($obj);
+            if($class == "Nhanvien")
+            {
+                $account = Taikhoan::register($obj->SDT,$obj->SDT,$obj->Loai);
+            }
+            $data['data'] = Nhanvien::getLast();
+            echo json_encode($data);
+        }
+        public function upload($action,$class)
+        {
+            $file_name = $_POST['name'];
+            $file_size = $_FILES['myfile']['size'];
+            $file_tmp = $_FILES['myfile']['tmp_name'];
+            $file_type = $_FILES['myfile']['type'];
+            move_uploaded_file($file_tmp,"asset/image/".strtolower($class)."/".$file_name);
+            echo json_encode(array('data'=>"upload ảnh thành công"));
+        }
+        
     }
 
 ?>

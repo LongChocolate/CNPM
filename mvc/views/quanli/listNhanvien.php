@@ -18,16 +18,17 @@
                 </ul> ";
             foreach($data[$class] as $d)
             {
+                $gt = $d->GioiTinh == "0" ? "Nam" : "Nữ";
                 echo"
                 <ul class='danhsach-item'>
                     <li style='width:10%;'>$d->MaNV</li>
                     <li style='width:15%;'>$d->SDT</li>
                     <li style='width:20%;'>$d->HoTen</li> 
-                    <li style='width:20%;'>$d->GioiTinh</li>
+                    <li style='width:20%;'>$gt</li>
                     <li style='width:15%;'>$d->Loai</li>	
                     <li style='width:20%;'>
-                        <button  onclick='view(`$d->MaNV`,`quanli`,`view`,`$class`)'   data-toggle='modal' data-target='#editNhanvien' class='Xem' id='btnSua' >Xem</button>
-                        <button  onclick='message($d->MaNV,`quanli`,`delete`,`$class`,this)' data-toggle='modal' data-target='#question'  class='Xoa' name='delete' id='btnXoa' >Xoá</button>
+                        <button  onclick='view(`$d->MaNV`,`quanli`,`view`,`$class`,this)'   data-toggle='modal' data-target='#viewNhanvien' class='Xem' id='btnSua' >Xem</button>
+                        <button  onclick='message(`$d->MaNV`,`quanli`,`delete`,`$class`,this)' data-toggle='modal' data-target='#question'  class='Xoa' name='delete' id='btnXoa' >Xoá</button>
                     </li>	                              
                 </ul>
                 ";
