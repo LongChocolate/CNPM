@@ -36,6 +36,7 @@
                 );
 
             }
+            redirect("Location: ?controller=nhanvienbanhang&action=create&class=Hoadon");
 
 
         }   

@@ -52,6 +52,7 @@
 
             }
             unsetCart();
+            redirect("?controller=nhanvienbanhang&action=index&class=Hoadon");
             
         }
         public function save($action,$class){
