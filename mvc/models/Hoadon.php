@@ -102,7 +102,7 @@
         }
         public static function create($MaHD,$TenNV,$NgayTao,$TongTien,$TrangThai)
         {
-            $sql = "insert into hoadon(`MaHD`,`TenNV`,`NgayTao`,`TongTien`,`TrangThai`) values(?,?,?,?,?)";
+            $sql = "insert into hoadon(`TenNV`,`NgayTao`,`TongTien`,`TrangThai`) values(?,?,?,?)";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             $stm->bind_param('sssis',$MaHD,$TenNV,$NgayTao,$TongTien,$TrangThai);
