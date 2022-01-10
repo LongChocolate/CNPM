@@ -30,29 +30,33 @@
 
         public function create($action,$class){
             $cart = getCart();
-            $obj = $cart['cart'];
-            if(isset($obj[1]->MaHD))
+            if($cart != null)
             {
-                $size = $obj[1]->MaHD;
-                $data = $class::delete($size); 
-            }
-            else
-            {
-                $size = $class::getSize() + 1;
-            }
-            $type = $_GET['type'];
-            $TrangThai = $type == 0 ? "Chưa thanh toán" : "Đã thanh toán";
-            $NgayTao = date("Y-m-d");
-            $hoadon = $class::create($size,$_SESSION['hoten'],$NgayTao,$cart['tongTien'],$TrangThai);
-            if($hoadon['code'] == 0)
-            {
-                foreach($obj as $o)
+                $obj = $cart['cart'];             
+                if(isset($obj[2]->MaHD))
                 {
-                    $chitiet = Chitiethoadon::create($size,$o);
-                }
 
+                    $size = $obj[2]->MaHD;
+                    $data = $class::delete($size); 
+                }
+                else
+                {
+                    $size = $class::getSize() + 1;
+                }
+                $type = $_GET['type'];
+                $TrangThai = $type == 0 ? "Chưa thanh toán" : "Đã thanh toán";
+                $NgayTao = date("Y-m-d");
+                $hoadon = $class::create($size,$_SESSION['hoten'],$NgayTao,$cart['tongTien'],$TrangThai);
+                if($hoadon['code'] == 0)
+                {
+                    foreach($obj as $o)
+                    {
+                        $chitiet = Chitiethoadon::create($size,$o);
+                    }
+
+                }
+                unsetCart();
             }
-            unsetCart();
             redirect("?controller=nhanvienbanhang&action=index&class=Hoadon");
             
         }
@@ -63,7 +67,7 @@
             unsetCart();
             foreach($data as $d)
             {
-                $sp = Sanpham::getOne($d[6])['error'];
+                $sp = Sanpham::getOne($d[6]);
                 $sp['soDat'] = $d[2];
                 $sp['MaHD'] = $MaHD;
                 saveCart(json_decode(json_encode($sp)));
