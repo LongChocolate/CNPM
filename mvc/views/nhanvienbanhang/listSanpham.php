@@ -46,9 +46,9 @@
                                     </li>
                                 </ul>
                                 <div class='chonSoLuong'>
-                                    <button onclick='prevSize($d->MaSP,$d->SoLuong)' class='decrease btn'>-</button>
+                                    <button onclick='prevSize($d->MaSP,$d->MaNL)' class='decrease btn'>-</button>
                                     <span class='size'>0</span>
-                                    <button onclick='nextSize($d->MaSP,$d->SoLuong)' class='increase btn'>+</button>
+                                    <button onclick='nextSize($d->MaSP,$d->MaNL)' class='increase btn'>+</button>
                                 </div>
                                 <div class='text-danger'></div>
                             </div>

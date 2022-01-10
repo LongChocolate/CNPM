@@ -1,34 +1,58 @@
 var fullSize = '';
 var Tong_Tien;
-function nextSize(MaSP,SoLuong)
+function nextSize(MaSP,MaNL)
 {
     var item = document.getElementById(MaSP);
     var size = item.querySelector('.size');
     var count = parseInt(size.innerHTML);
-    if(count == SoLuong)
-    {
-        fullSize = "Đồ uống này chỉ còn " + SoLuong + " số lượng";
-        item.querySelector('.text-danger').innerHTML = fullSize;
-        fullSize = '';
-    }
-    else
-    {
-        count = count + 1;
-        
-    }
-    size.innerHTML = count;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','index.php?controller=nhanvienbanhang&action=view&class=Nguyenlieu&id='+MaNL);
+    xhr.send();
+    xhr.addEventListener('load',e =>{
+       if (xhr.readyState === 4 && xhr.status ===200)
+       {
+           var response = xhr.responseText;
+           var data = JSON.parse(response);
+           if(count == data.SoLuong)
+            {
+
+                fullSize = "Đồ uống này chỉ còn " + data.SoLuong + " số lượng";
+                item.querySelector('.text-danger').innerHTML = fullSize;
+                fullSize = '';
+            }
+            else
+            {
+                count = count + 1;
+                
+            }
+            size.innerHTML = count;
+
+       }
+    });
+    
 }
 
-function prevSize(MaSP,SoLuong)
+function prevSize(MaSP,MaNL)
 {
     var item = document.getElementById(MaSP);
     var size = item.querySelector('.size');
     var count =  parseInt(size.innerHTML) == 0 ? parseInt(size.innerHTML) : parseInt(size.innerHTML) - 1;
-    if(count != SoLuong)
-    {
-        item.querySelector('.text-danger').innerHTML = fullSize;
-    }
-    size.innerHTML = count;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','index.php?controller=nhanvienbanhang&action=view&class=Nguyenlieu&id='+MaNL);
+    xhr.send();
+    xhr.addEventListener('load',e =>{
+       if (xhr.readyState === 4 && xhr.status ===200)
+       {
+            var response = xhr.responseText;
+            var data = JSON.parse(response);
+            if(count != data.SoLuong)
+            {
+                item.querySelector('.text-danger').innerHTML = fullSize;
+            }
+            size.innerHTML = count;
+
+       }
+    });
 }
 
 function datMon(object)

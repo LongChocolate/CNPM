@@ -4,6 +4,7 @@
     require_once('models/Sanpham.php');
     require_once('models/Chitiethoadon.php');
     require_once('models/Hoadon.php');
+    require_once('models/Nguyenlieu.php');
     class NhanvienbanhangController extends BaseController{
         function __construct(){
             $this->controller = 'nhanvienbanhang';
@@ -69,6 +70,12 @@
             }
             
 
+        }
+        public function view($action,$class)
+        {
+            $id = $_GET['id'];
+            $data = $class::getOne($id);
+            echo json_encode($data);
         }
         public function delete($action,$class){
             $id = $_GET['id'];
