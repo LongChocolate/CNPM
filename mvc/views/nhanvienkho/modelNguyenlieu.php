@@ -17,7 +17,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Tên nguyên liệu</label>
-                                <input class="form-control" id="Ten" type="text" >
+                                <input class="form-control" id="TenNL" type="text" >
                             </div>
                             <div class="form-group">
                                 <label>Số lượng</label>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Tên nguyên liệu</label>
-                                <input class="form-control" id="Ten" type="text" >
+                                <input class="form-control" id="TenNL" type="text" >
                             </div>
                             <div class="form-group">
                                 <label>Số lượng</label>

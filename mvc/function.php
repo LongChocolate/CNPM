@@ -24,7 +24,7 @@
             'Nhanvien'=> array('MaNV','SDT','HoTen','Anh','GioiTinh','CMND','Loai'),
             'Sanpham'=>array('MaSP','Ten','Anh','MaNL','Gia','category_id'),
             'Danhmuc'=>array('id','TenDM'),
-            'Nguyenlieu'=>array('MaNL','Ten','SoLuong','NhaCungCap','NguonCungCap','HanSuDung')
+            'Nguyenlieu'=>array('MaNL','TenNL','SoLuong','NhaCungCap','NguonCungCap','HanSuDung')
         );
         return $listA[$class];
     }
