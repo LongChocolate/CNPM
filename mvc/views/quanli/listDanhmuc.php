@@ -6,7 +6,7 @@
         </div>
         <div class='body-model'>
             <div class='body-list'>
-                <ul class='header-list'>
+                <ul class='header-list text-center'>
                     <li style='width:25%;'>Mã Danh Mục</li>
                     <li style='width:40%;'>Tên danh mục</li> 
                     <li style='width:35%;'>
@@ -16,7 +16,7 @@
             foreach($data[$class] as $d)
             {
                 echo"
-                <ul class='danhsach-item'>
+                <ul class='danhsach-item text-center'>
                     <li style='width:25%;'>$d->id</li>
                     <li style='width:40%;'>$d->TenDM</li>
                     <li style='width:35 %;'>

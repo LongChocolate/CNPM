@@ -27,7 +27,7 @@
             extract($select);
             
             ob_start();
-            if($controller != "nhanvienbanhang")
+            if($controller != "nhanvienbanhang" && $view['action'] != 'thongke')
             {
                 require_once('views/'.$this->controller.'/model'.$this->class.'.php');
             }

@@ -6,7 +6,7 @@
         </div>
         <div class='body-model '>
             <div class='body-list'>
-                <ul class='header-list'>
+                <ul class='header-list text-center'>
                     <li style='width:10%;'>Mã Nhân Viên</li>
                     <li style='width:15%;'>Số Điện Thoại</li>
                     <li style='width:20%;'>Họ Tên</li>
@@ -20,7 +20,7 @@
             {
                 $gt = $d->GioiTinh == "0" ? "Nam" : "Nữ";
                 echo"
-                <ul class='danhsach-item'>
+                <ul class='danhsach-item text-center'>
                     <li style='width:10%;'>$d->MaNV</li>
                     <li style='width:15%;'>$d->SDT</li>
                     <li style='width:20%;'>$d->HoTen</li> 

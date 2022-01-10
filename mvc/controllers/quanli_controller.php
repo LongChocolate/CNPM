@@ -5,6 +5,7 @@
     require_once('models/Danhmuc.php');
     require_once('models/Taikhoan.php'); 
     require_once('models/Nguyenlieu.php'); 
+    require_once('models/Hoadon.php'); 
     require_once('function.php');
 
     class QuanliController extends BaseController{ 
@@ -88,6 +89,29 @@
             $file_type = $_FILES['myfile']['type'];
             move_uploaded_file($file_tmp,"asset/image/".strtolower($class)."/".$file_name);
             echo json_encode(array('data'=>"upload ảnh thành công"));
+        }
+        public function thongke($action,$class)
+        {
+            if(isset($_GET['loai']))
+            {
+                $data = $class::thongke($_GET['loai']);
+                echo json_encode($data);
+            }
+            else
+            {
+                $this->action = $action;
+                $this->class = $class;
+                $view = array('action'=>$this->action,
+                                'class'=>$this->class,
+                                'controller'=>$this->controller);
+                $obj = $class::thongke();
+                $data = array($class => $obj);
+                $this->render();
+                $this->title($this->class,
+                    array($this->list($data,$view))
+                );
+            }
+            
         }
         
     }

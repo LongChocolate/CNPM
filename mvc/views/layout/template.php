@@ -13,6 +13,7 @@
     <script src='asset/js/view.js'></script>
     <script src='asset/js/datmon.js'></script>
     <script src='asset/js/upload.js'></script>
+    <script src='asset/js/thongke.js'></script>
     <link rel="stylesheet" href="asset/fontawesome-free-5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

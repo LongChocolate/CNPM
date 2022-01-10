@@ -2,7 +2,7 @@
     
     $supported_controllers = array(
         'nhanvienbanhang' => array('index','view','edit','create','delete','save'),
-        'quanli' => array('index','delete','edit','create','view','upload'),
+        'quanli' => array('index','delete','edit','create','view','upload','thongke'),
         'nhanvienkho' => array('index','delete','edit','view','create'),
         'pages' => array('error')
     );

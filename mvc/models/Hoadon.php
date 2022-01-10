@@ -113,5 +113,37 @@
             }
             return array('code'=> 0,'error' =>"Thêm hoá đơn thành công");
         }
+
+        public static function thongke($loai = 'Ngày')
+        {
+            $sql = '';
+            if($loai == 'Ngày')
+            {
+                $sql = "select date_format(NgayTao,'%d-%m-%y'),sum(TongTien) as 'TongTien' 
+                from hoadon
+                Group by NgayTao";
+            }
+            else if($loai == 'Tháng')
+            {
+                $sql = "select date_FORMAT(`NgayTao`,'%m-%y'),sum(TongTien) as 'TongTien' 
+                from hoadon
+                Group by date_FORMAT(`NgayTao`,'%m-%y')";
+            }
+            elseif ($loai == 'Năm')
+            {
+                $sql = "select Year(`NgayTao`),sum(TongTien) as 'TongTien' 
+                from hoadon
+                Group by Year(`NgayTao`)";
+            }         
+            $conn = Connection::open_database();
+            $stm = $conn->prepare($sql);
+            if(!$stm->execute())
+            {
+                return null;
+            }
+            $result = $stm->get_result();
+            $data = $result->fetch_all();
+            return $data;
+        }
     }
 ?>

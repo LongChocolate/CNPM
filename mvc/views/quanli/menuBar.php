@@ -19,7 +19,7 @@
     
     </li>
 </a>
-<a  href='' class='navbar-item-link'>
+<a  href='?controller=quanli&action=thongke&class=hoadon' class='navbar-item-link'>
     <li class='navbar-item navbar-noti'>        
         <i class='fas fa-hand-holding-usd'></i>
         Quản Lý Doanh Thu
