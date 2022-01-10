@@ -68,7 +68,6 @@
                 <ul class='ds-hoaDon'>";
                 if(isset($_SESSION['cart']))
                 {
-                    print_r($_SESSION['cart']);
                     foreach(($_SESSION['cart']) as $obj)
                     {
                         
