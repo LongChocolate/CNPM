@@ -22,7 +22,9 @@
     {
         $listA = array(
             'Nhanvien'=> array('MaNV','SDT','HoTen','Anh','GioiTinh','CMND','Loai'),
-            'Sanpham'=>array('MaSP','Ten','Anh','SoLuong','Gia','category_id')
+            'Sanpham'=>array('MaSP','Ten','Anh','MaNL','Gia','category_id'),
+            'Danhmuc'=>array('id','TenDM'),
+            'Nguyenlieu'=>array('MaNL','Ten','SoLuong','NhaCungCap','NguonCungCap','HanSuDung')
         );
         return $listA[$class];
     }
@@ -51,14 +53,21 @@
     }
     function getCart()
     {
-        $tong_soluong = 0;
-        $tong_tien = 0;
-        foreach(($_SESSION['cart']) as $obj)
+        if(isset($_SESSION['cart']))
         {
-            $tong_tien = $tong_tien + ($obj->Gia * $obj->soDat);
-            $tong_soluong = $tong_soluong + $obj->soDat;
+            $tong_soluong = 0;
+            $tong_tien = 0;
+            foreach(($_SESSION['cart']) as $obj)
+            {
+                $tong_tien = $tong_tien + ($obj->Gia * $obj->soDat);
+                $tong_soluong = $tong_soluong + $obj->soDat;
+            }   
+            return array('cart' => $_SESSION['cart'],'tongTien' => $tong_tien,'tongSoLuong' => $tong_soluong); 
         }
-        return array('cart' => $_SESSION['cart'],'tongTien' => $tong_tien,'tongSoLuong' => $tong_soluong);
+        else
+        {
+            return array('cart' => null);
+        }
     }
     function unsetCart()
     {

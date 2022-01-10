@@ -1,4 +1,5 @@
 <?php 
+    $dis = isset($_SESSION['cart']) == true ? "disabled" : '';
     function trans($Gia)
     {
         $cost = $Gia;
@@ -45,9 +46,9 @@
                                     </li>
                                 </ul>
                                 <div class='chonSoLuong'>
-                                    <button onclick='prevSize($d->MaSP,$d->SoLuong)' class='decrease'>-</button>
+                                    <button onclick='prevSize($d->MaSP,$d->SoLuong)' class='decrease btn'>-</button>
                                     <span class='size'>0</span>
-                                    <button onclick='nextSize($d->MaSP,$d->SoLuong)' class='increase'>+</button>
+                                    <button onclick='nextSize($d->MaSP,$d->SoLuong)' class='increase btn'>+</button>
                                 </div>
                                 <div class='text-danger'></div>
                             </div>
@@ -105,8 +106,8 @@
                 <div>
                     <a href='index.php?controller=nhanvienbanhang&action=create&class=Hoadon&type=0' class='btn btn-primary mb-3 width-100pc'>Lưu</a>
                     <div class='btn-thanhtoan'>
-                        <button onclick='payByCash()' class='btn btn-warning' data-toggle='modal' data-target='#payByCash'>Tiền mặt</button>
-                        <button class='btn btn-outline-warning' data-toggle='modal' data-target='#payByCredit'>Thẻ</button>
+                        <button onclick='payByCash(0)' class='btn btn-warning'>Tiền mặt</button>
+                        <button onclick='payByCash(1)' class='btn btn-outline-warning'>Thẻ</button>
                     </div>
                 </div>
             </div>

@@ -1,26 +1,34 @@
 <?php
     require_once('Connection.php');
     
-    class Danhmuc{
+    class Nguyenlieu{
 
-        public $id;
-        public $TenMD;
-        public function __construct($id = null,$TenDM = null)
+        public $MaNL;
+        public $Ten;
+        public $SoLuong;
+        public $NhaCungCap;
+        public $NguonCungCap;
+
+        public function __construct($MaNL = null,$Ten = null,$SoLuong = null,$NhaCungCap = null,$NguonCungCap = null,$HanSuDung = null)
         {
-            $this->id = $id;
-            $this->TenDM = $TenDM;
+            $this->MaNL = $MaNL;
+            $this->Ten = $Ten;
+            $this->SoLuong = $SoLuong;
+            $this->NhaCungCap = $NhaCungCap;
+            $this->NguonCungCap = $NguonCungCap;
+            $this->HanSuDung = $HanSuDung;
 
         }
         
         public static function getOne($id)
         {
-            $sql = "select * from danhmuc where id = ? ";
+            $sql = "select * from nguyenlieu where MaNL = ? ";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             $stm->bind_param('i',$id);
             if(!$stm->execute())
             {
-                return array('code' => 1,'error'=>'Không tìm thấy sản phẩm này');
+                return array('code' => 1,'error'=>'Không tìm thấy Nguyên liệu này');
             }
             $result = $stm->get_result();
             $data = $result->fetch_assoc();
@@ -29,7 +37,7 @@
 
         public static function getLast()
         {
-            $sql = "select  * from danhmuc ORDER BY id DESC LIMIT 1 ";
+            $sql = "select  * from nguyenlieu ORDER BY MaNL DESC LIMIT 1 ";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             if(!$stm->execute())
@@ -42,7 +50,7 @@
         }
         public static function getAll()
         {
-            $sql = "select * from danhmuc";
+            $sql = "select * from nguyenlieu";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             if(!$stm->execute())
@@ -54,14 +62,14 @@
             $list = array();
             foreach($data as $s)
             {
-                $list[] = new Danhmuc($s[0],$s[1]);
+                $list[] = new Nguyenlieu($s[0],$s[1],$s[2]);
             }
             return $list;
 
         }
         public static function delete($id)
         {
-            $sql = "delete from danhmuc where id = ?";
+            $sql = "delete from nguyenlieu where MaNL = ?";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             $stm->bind_param('i',$id);
@@ -73,12 +81,12 @@
         }
         public static function edit($object)
         {
-            $sql = "update  danhmuc
-                    set TenDM = ?
-                    where id = ?";
+            $sql = "update  nguyenlieu
+                    set Ten = ?,SoLuong = ?,NhaCungCap = ?, NguonCungCap = ?, HanSuDung = ?
+                    where MaNL = ?";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
-            $stm->bind_param('si',$object->TenDM,$object->id);
+            $stm->bind_param('sii',$object->Ten,$object->SoLuong,$object->NhaCungCap,$object->NguonCungCap,$object->HanSuDung,$object->MaNL);
             if(!$stm->execute())
             {
                 return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");
@@ -87,10 +95,10 @@
         }
         public static function create($object)
         {
-            $sql = "insert into danhmuc(`TenDM`) values(?)";
+            $sql = "insert into nguyenlieu(`Ten`,`SoLuong`,`NhaCungCap`,`NguonCungCap`,`HanSuDung`) values(?,?,?,?,?)";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
-            $stm->bind_param('s',$object->TenDM);
+            $stm->bind_param('sisss',$object->Ten,$object->SoLuong,$object->NhaCungCap,$object->NguonCungCap,$object->HanSuDun);
             if(!$stm->execute())
             {
                 return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");

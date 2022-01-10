@@ -3,7 +3,7 @@
     $supported_controllers = array(
         'nhanvienbanhang' => array('index','view','edit','create','delete','save'),
         'quanli' => array('index','delete','edit','create','view','upload'),
-        'nhanvienkho' => array('index','delete','edit','add','create'),
+        'nhanvienkho' => array('index','delete','edit','view','create'),
         'pages' => array('error')
     );
     if (!array_key_exists($controller, $supported_controllers) || !in_array($action,$supported_controllers[$controller]))

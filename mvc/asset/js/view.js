@@ -11,7 +11,7 @@ function onSubmitEdit(controller,action,clas)
         {
             data[state[i]] = (modal.querySelector('#' + state[i]).src).slice(45);
         }
-        else if(state[i] == "category_id" || state[i] == "Loai")
+        else if(state[i] == "category_id" || state[i] == "Loai" || (clas == 'Sanpham' && state[i] == 'MaNL'))
         {
             var inpt = form.querySelector('#' + state[i]);
             data[state[i]] = inpt.options[inpt.selectedIndex].value;
@@ -38,12 +38,13 @@ function onSubmitEdit(controller,action,clas)
         if (xhr.readyState === 4 && xhr.status ===200)
         {
             let response = xhr.responseText;
+            console.log(response)
             response = JSON.parse(response);
             var mess = document.getElementById('ThongBaoModal');
             var content = mess.querySelector('#Content-Thongbao');
             content.innerHTML = response.error;         
-            data = response.data
-         
+            data = response.data            
+
             $('#'+action+clas).modal('hide');
             $('#ThongBaoModal').modal('toggle');
             if(response.code == 0)
@@ -56,24 +57,45 @@ function onSubmitEdit(controller,action,clas)
                 <li style='width:20%;'>${data['GioiTinh'] == "0" ? "Nam" : "Nữ" }</li>
                 <li style='width:15%;'>${data['Loai']}</li>	
                 <li style='width:20%;'>
-                    <button  onclick="view('${data.MaNV}','quanli','view','${clas}',this)"  data-toggle='modal' data-target='#viewNhanvien' class='Xem' id='btnSua' >Xem</button>
-                    <button  onclick="message('${data.MaNV}','quanli','delete','${clas}',this)" data-toggle='modal' data-target='#question'  class='Xoa' name='delete' id='btnXoa' >Xoá</button>
+                    <button  onclick="view('${data.MaNV}','quanli','view','${clas}',this)"  data-toggle='modal' data-target='#viewNhanvien' class='Xem btn' id='btnSua' >Xem</button>
+                    <button  onclick="message('${data.MaNV}','quanli','delete','${clas}',this)" data-toggle='modal' data-target='#question'  class='Xoa btn' name='delete' id='btnXoa' >Xoá</button>
                 </li>`   
                 }
-                else if(clas == "Sanpham")
+                else if(clas == "Danhmuc")
+                    {
+                        button.parentElement.parentElement.innerHTML = `<li style='width:25%;'>${data['id']}</li>
+                                        <li style='width:40%;'>${data['TenDM']}</li>
+                                        <li style='width:35%;'>
+                                            <button  onclick="view('${data.id}','quanli','view','${clas}',this)"   data-toggle='modal' data-target='#viewDanhmuc' class='Xem btn'  >Xem</button>
+                                            <button  onclick="message('${data.id}','quanli','delete','${clas}',this)"    data-toggle='modal' class='Xoa btn'  data-target='#question'>Xoá</button>
+                                        </li>`
+                    }
+                
+                else if(clas == "Nguyenlieu")
                 {
-                    button.parentElement.parentElement.innerHTML = `
-                    <li style='width:10%;'>${data['MaSP']}</li>
-                    <li style='width:15%;'>${data['Ten']}</li>
-                    <li style='width:20%;'>${data['SoLuong']}</li>
-                    <li style='width:20%;'>${data['Gia']}</li>
-                    <li style='width:15%;'>${data['category_id']}</li>
-                    <li style='width:20%;'>
-                        <button  onclick="view('${data.MaSP}','quanli','view','${clas}',this)"   data-toggle='modal' data-target='#viewSanpham' class='Xem' id='btnSua' >Xem</button>
-                        <button  onclick="message('${data.MaSP}','quanli','delete','${clas}',this)"   class='Xoa'  id='btnXoa' >Xoá</button>
-                    </li>`    
+                   
+                    button.parentElement.parentElement.innerHTML =  `<li style='width:25%;'>${data['MaNL']}</li>
+                                    <li style='width:40%;'>${data['TenNL']}</li>
+                                    <li style='width:35 %;'>
+                                        <button  onclick="view('${data['MaNL']}','nhanvienkho','view','${clas}',this)"   data-toggle='modal' data-target='#viewNguyenlieu' class='Xem btn' >Xem</button>
+                                        <button  onclick="message('${data['MaNL']}','nhanvienkho','delete','${clas}',this)"   data-toggle='modal'  class='Xoa btn'  data-target='#question' >Xoá</button>
+                                </li>	 `
                 }
-            }
+                else 
+                {
+                    
+                    button.parentElement.parentElement.innerHTML = `
+                                    <li style='width:10%;'>${data['MaSP']}</li>
+                                    <li style='width:15%;'>${data['Ten']}</li>
+                                    <li style='width:20%;'>${data['MaNL']}</li>
+                                    <li style='width:20%;'>${data['Gia']}</li>
+                                    <li style='width:15%;'>${data['category_id']}</li>
+                                    <li style='width:20%;'>
+                                        <button  onclick="view('${data.MaSP}','quanli','view','${clas}',this)"   data-toggle='modal' data-target='#viewSanpham' class='Xem btn'  >Xem</button>
+                                        <button  onclick="message('${data.MaSP}','quanli','delete','${clas}',this)"   data-toggle='modal' class='Xoa btn'   data-target='#question'>Xoá</button>
+                                    </li>`    
+                }
+            }    
         }
     });
 }
@@ -98,7 +120,7 @@ function onSubmitCreate(controller,action,clas)
                 {
                     data[state[i]] = (modal.querySelector('#' + state[i]).src).slice(45);
                 }
-                else if(state[i] == "category_id" || state[i] == "Loai")
+                else if(state[i] == "category_id" || state[i] == "Loai" || (clas == 'Sanpham' && state[i] == 'MaNL'))
                 {
                     var inpt = form.querySelector('#' + state[i]);
                     
@@ -127,13 +149,14 @@ function onSubmitCreate(controller,action,clas)
             xr.addEventListener('load',e =>{
 
                 let response = xr.responseText;
-                console.log(response)
+                // console.log(response)
                 response = JSON.parse(response);
                 var mess = document.getElementById('ThongBaoModal');
                 var content = mess.querySelector('#Content-Thongbao');
                 content.innerHTML = response.error;
-             
+                
                 data = response.data;
+                console.log(data)
                 $('#'+action+clas).modal('hide');
                 $('#ThongBaoModal').modal('toggle');
                 if(response.code == 0)
@@ -149,21 +172,39 @@ function onSubmitCreate(controller,action,clas)
                                     <li style='width:20%;'>${data['GioiTinh']  == "0" ? "Nam" : "Nữ"}</li>
                                     <li style='width:15%;'>${data['Loai']}</li>	
                                     <li style='width:20%;'>
-                                        <button  onclick="view('${data.MaNV}','quanli','view','${clas}',this)"  data-toggle='modal' data-target='#viewNhanvien' class='Xem' id='btnSua' >Xem</button>
-                                        <button  onclick="message('${data.MaNV}','quanli','delete','${clas}',this)" data-toggle='modal' data-target='#question'  class='Xoa' name='delete' id='btnXoa' >Xoá</button>
+                                        <button  onclick="view('${data.MaNV}','quanli','view','${clas}',this)"  data-toggle='modal' data-target='#viewNhanvien' class='Xem btn'  >Xem</button>
+                                        <button  onclick="message('${data.MaNV}','quanli','delete','${clas}',this)" data-toggle='modal' data-target='#question'  class='Xoa btn' name='delete' id='btnXoa' >Xoá</button>
                                     </li>	                              
                                 `
+                    }
+                    else if(clas == "Danhmuc")
+                    {
+                        ul.innerHTML = `<li style='width:25%;'>${data['id']}</li>
+                                        <li style='width:40%;'>${data['TenDM']}</li>
+                                        <li style='width:35%;'>
+                                            <button  onclick="view('${data.id}','quanli','view','${clas}',this)"   data-toggle='modal' data-target='#viewDanhmuc' class='Xem btn'>Xem</button>
+                                            <button  onclick="message('${data.id}','quanli','delete','${clas}',this)"   data-toggle='modal'  class='Xoa btn'  data-target='#question' >Xoá</button>
+                                        </li>`
+                    }
+                    else if(clas == "Nguyenlieu")
+                    {
+                        ul.innerHTML =  `<li style='width:25%;'>${data['MaNL']}</li>
+                                        <li style='width:40%;'>${data['TenNL']}</li>
+                                        <li style='width:35 %;'>
+                                            <button  onclick="view('${data.MaNL}','nhanvienkho','view','${clas}',this)"   data-toggle='modal' data-target='#viewNguyenlieu' class='Xem btn' >Xem</button>
+                                            <button  onclick="message('${data.MaNL}','nhanvienkho','delete','${clas}',this)"   data-toggle='modal'  class='Xoa btn'   data-target='#question' >Xoá</button>
+                                    </li>	 `
                     }
                     else
                     {
                         ul.innerHTML = `<li style='width:10%;'>${data['MaSP']}</li>
-                                        <li style='width:15%;'>${data['Ten']}</li>
-                                        <li style='width:20%;'>${data['SoLuong']}</li>
-                                        <li style='width:20%;'>${data['Gia']}</li>
-                                        <li style='width:15%;'>${data['category_id']}</li>
+                        <li style='width:15%;'>${data['Ten']}</li>
+                        <li style='width:20%;'>${data['MaNL']}</li>
+                        <li style='width:20%;'>${data['Gia']}</li>
+                        <li style='width:15%;'>${data['category_id']}</li>
                                         <li style='width:20%;'>
-                                            <button  onclick="view('${data.MaSP}','quanli','view','${clas}',this)"   data-toggle='modal' data-target='#viewSanpham' class='Xem' id='btnSua' >Xem</button>
-                                            <button  onclick="message('${data.MaSP}','quanli','delete','${clas}',this)"   class='Xoa'  id='btnXoa' >Xoá</button>
+                                            <button  onclick="view('${data.MaSP}','quanli','view','${clas}',this)"   data-toggle='modal' data-target='#viewSanpham' class='Xem btn' id='btnSua' >Xem</button>
+                                            <button  onclick="message('${data.MaSP}','quanli','delete','${clas}',this)"    data-toggle='modal' class='Xoa btn'   data-target='#question' >Xoá</button>
                                         </li>`
                     } 
                     let body = document.querySelector('.body-list');
@@ -188,7 +229,7 @@ function view(object ,controller,action,clas,ths)
             if (xhr.readyState === 4 && xhr.status ===200)
             {
                 let response = xhr.responseText;
-                
+                console.log(response)
                 response = JSON.parse(response)
                 var data = response.data;
                 state = response.attribute;
@@ -224,10 +265,17 @@ function view(object ,controller,action,clas,ths)
                     {
                         inpt.options[data[state[i]]-1].selected = "selected"
                     }
-                    else if(state[i] == "Loai")
+                    else if(state[i] == "Loai" || (clas == 'Sanpham' && state[i] == 'MaNL'))
                     {
-                        var select = data[state[i]] == "Quản lí"? 0 : 1;
-                        inpt.options[select].selected = "selected"
+                        var select = data[state[i]];
+                        var op = modal.querySelector('select')
+                        for(var o of op.querySelectorAll("option"))
+                        {
+                            if(o.value == select)
+                            {
+                                o.selected = "selected"
+                            }
+                        }
                     }
                     else
                     {

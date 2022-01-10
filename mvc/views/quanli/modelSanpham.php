@@ -27,8 +27,17 @@
                                 <input class="form-control" id="Ten" name="sdt" type="text" >
                             </div>
                             <div class="form-group">
-                                <label >Số Lượng</label>
-                                <input class="form-control" id="SoLuong" name="name" type="text" >
+                                <label >Loại Nguyên liệu</label>
+                                <select id="MaNL" class='btn'>
+                                    <?php
+                                        foreach($select['Nguyenlieu'] as $s)
+                                        {
+                                            echo"
+                                                <option value='$s->MaNL'>$s->Ten</option>
+                                            ";
+                                        }
+                                    ?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label >Giá</label>
@@ -36,9 +45,9 @@
                             </div>
                             <div class="form-group">
                                 <label for='Loai'>Loai</label>
-                                <select id="category_id">
+                                <select id="category_id" class='btn'>
                                     <?php
-                                        foreach($select as $s)
+                                        foreach($select['Danhmuc'] as $s)
                                         {
                                             echo"
                                             <option value='$s->id'>$s->TenDM</option>
@@ -88,8 +97,17 @@
                                 <input class="form-control" id="Ten"  type="text" >
                             </div>
                             <div class="form-group">
-                                <label for="name">Số Lượng</label>
-                                <input class="form-control" id="SoLuong"  type="text" >
+                            <label >Loại Nguyên liệu</label>
+                                <select id="MaNL" class='btn'>
+                                    <?php
+                                        foreach($select['Nguyenlieu'] as $s)
+                                        {
+                                            echo"
+                                                <option value='$s->MaNL'>$s->Ten</option>
+                                            ";
+                                        }
+                                    ?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="name">Giá</label>
@@ -99,7 +117,7 @@
                                 <label for="name">Loại</label>
                                 <select id="category_id">
                                     <?php
-                                        foreach($select as $s)
+                                        foreach($select['Danhmuc'] as $s)
                                         {
                                             echo"
                                             <option value='$s->id'>$s->TenDM</option>

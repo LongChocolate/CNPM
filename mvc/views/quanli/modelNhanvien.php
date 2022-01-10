@@ -13,7 +13,7 @@
                         <div class="form-group  col-md-6 col-s-12">
                             <label for="name"></label>
                             <img class='mx-auto' id='Anh' src=""  alt="Avatar" width="300px" height="300px" />
-                            <p><input required type='file' id='image' name='image' class="w-3"></p>
+                            <p><input required type='file' id='image' name='image' class="w-3 btn"></p>
                             <button onclick="upload('quanli','view','Nhanvien')" type="button" class="btn btn-danger w-3">Thay đổi ảnh</button>
                         </div>
                         <div class="form-group  col-md-6 col-s-12">
@@ -31,9 +31,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Giới Tính</label>
-                                <div class="form-group">
-                                    <input   value="0" name="GioiTinh" type="radio" > Nam
-                                    <input  value="1" name="GioiTinh" type="radio" > Nữ
+                                <div class="form-group ">
+                                    <input  class='btn' value="0" name="GioiTinh" type="radio" > Nam
+                                    <input  class='btn' value="1" name="GioiTinh" type="radio" > Nữ
                                 </div>
                             </div>
                             <div class="form-group">
@@ -42,9 +42,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Loại</label>
-                                <select id="Loai">
+                                <select id="Loai" class='btn'>
                                     <option value='Quản lí'>Quản lí</option>
                                     <option value='Nhân viên bán hàng'>Nhân viên bán hàng</option>
+                                    <option value='Nhân viên kho'>Nhân viên kho</option>
                                 </select>
                             </div>                 
                         </div>

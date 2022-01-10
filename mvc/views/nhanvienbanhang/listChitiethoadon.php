@@ -84,7 +84,7 @@ echo"
                     <div id='cash' class='container tab-pane active'><br>
                         <div class='form-group'>
                             <label for='moneyOfCustomer'>Số tiền khách đưa</label>
-                            <input  oninput='moneyOfCustomer(this,$t)' $TrangThai type='number' class='form-control' id='moneyOfCustomer' placeholder='Nhập số tiền'>
+                            <input  oninput='moneyOfCustom(this,$t)' $TrangThai type='number' class='form-control' id='moneyOfCustomer' placeholder='Nhập số tiền'>
                             </div>
                         <div class='form-group'>
                             <label for='discount'>Giảm giá</label>
@@ -102,6 +102,7 @@ echo"
                     </div>
                     <div id='credit' class='container tab-pane fade'><br>
                         <img class='width-100pc' src='asset/image/background/undraw_Credit_card_re_blml.png' alt='img credit card'>
+                        <button onclick='editMon($MaHD)' $TrangThai type='button' class='btn btn-warning width-100pc'>Thanh toán</button>
                     </div>
                 </div>
             </div>

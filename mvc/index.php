@@ -32,6 +32,10 @@
 		{
 			$class = 'sanpham';
 		}
+		if($controller == 'nhanvienkho')
+		{
+			$class = 'nguyenlieu';
+		}
 	}
 	require_once('route.php');
 ?>

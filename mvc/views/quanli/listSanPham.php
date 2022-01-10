@@ -9,11 +9,11 @@
                 <ul class='header-list'>
                     <li style='width:10%;'>Mã Sản Phẩm</li>
                     <li style='width:15%;'>Tên</li> 
-                    <li style='width:20%;'>Số lượng</li>
+                    <li style='width:20%;'>Loại Nguyên liệu</li>
                     <li style='width:20%;'>Giá</li>
                     <li style='width:15%;'>Loại</li>
                     <li style='width:20%;'>
-                    <button name='btnThem' data-toggle='modal' data-target='#createSanpham' class='Them'>Thêm mới</button>
+                    <button name='btnThem' data-toggle='modal' data-target='#createSanpham' class='Them btn'>Thêm mới</button>
                     </li>
                 </ul> ";
             foreach($data[$class] as $d)
@@ -22,12 +22,12 @@
                 <ul class='danhsach-item'>
                     <li style='width:10%;'>$d->MaSP</li>
                     <li style='width:15%;'>$d->Ten</li>
-                    <li style='width:20%;'>$d->SoLuong</li>
+                    <li style='width:20%;'>$d->MaNL</li>
                     <li style='width:20%;'>$d->Gia</li>
                     <li style='width:15%;'>$d->category_id</li>
                     <li style='width:20%;'>
-                    <button  onclick='view(`$d->MaSP`,`quanli`,`view`,`$class`,this)'   data-toggle='modal' data-target='#viewSanpham' class='Xem' id='btnSua' >Xem</button>
-                    <button  onclick='message(`$d->MaSP`,`quanli`,`delete`,`$class`,this)' data-toggle='modal' data-target='#question'   class='Xoa'  id='btnXoa' >Xoá</button>
+                    <button  onclick='view(`$d->MaSP`,`quanli`,`view`,`$class`,this)'   data-toggle='modal' data-target='#viewSanpham' class='Xem btn' >Xem</button>
+                    <button  onclick='message(`$d->MaSP`,`quanli`,`delete`,`$class`,this)' data-toggle='modal' data-target='#question'   class='Xoa btn' >Xoá</button>
                     </li>	                              
                 </ul>
                 ";

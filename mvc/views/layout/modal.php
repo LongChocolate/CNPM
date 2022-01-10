@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="moneyOfCustomer">Số tiền khách đưa</label>
-                    <input required oninput='moneyOfCustomer(this,0)' type="number" class="form-control" id="moneyOfCustomer" placeholder="Nhập số tiền">
+                    <input required oninput='moneyOfCustom(this,0)' type="number" class="form-control" id="moneyOfCustomer" placeholder="Nhập số tiền">
                   </div>
                 <div class="form-group">
                     <label for="discount">Giảm giá</label>
@@ -28,7 +28,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <a href='index.php?controller=nhanvienbanhang&action=create&class=Hoadon&type=1' type="submit" class="btn btn-primary">Thanh toán</a>
+                <button  type="submit"  class="btn"><a href='index.php?controller=nhanvienbanhang&action=create&class=Hoadon&type=1' >Thanh toán</a></button>
             </div>
             </form>
         </div>
@@ -55,7 +55,7 @@
         </div>
         </div>
     </div>
-    <div class="modal fade " id="ThongBaoModal" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade " id="ThongBaoModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content ">
             <div class="modal-header">

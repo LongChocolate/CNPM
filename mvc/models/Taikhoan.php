@@ -61,7 +61,7 @@ class Taikhoan{
                 where SDT = ?";
         $conn = Connection::open_database();
         $stm = $conn->prepare($sql);
-        $stm->bind_param('ss',$SDT,$Loai);
+        $stm->bind_param('ss',$Loai,$SDT);
         if(!$stm->execute())
         {
             return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");

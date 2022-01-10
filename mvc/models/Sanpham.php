@@ -7,16 +7,16 @@
         public $Ten;
         public $Anh;
         public $Gia;
-        public $SoLuong;
+        public $MaNL;
         public $category_id;
         public $created;
         public $updated;
-        public function __construct($MaSP,$Ten,$Anh,$SoLuong,$Gia,$category_id,$created,$updated)
+        public function __construct($MaSP ,$Ten ,$Anh,$MaNL,$Gia,$category_id,$created =null,$updated =null)
         {
             $this->MaSP = $MaSP;
             $this->Ten = $Ten;
             $this->Anh = $Anh;
-            $this->SoLuong = $SoLuong;
+            $this->MaNL = $MaNL;
             $this->Gia = $Gia;
             $this->category_id = $category_id;
             $this->created = $created;
@@ -26,7 +26,9 @@
 
         public static function getOne($MaSP)
         {
-            $sql = "select * from sanpham where MaSP = ?";
+            $sql = "select sanpham.*,TenNL,TenDM 
+            from sanpham,nguyenlieu,danhmuc 
+            where sanpham.category_id = danhmuc.id and sanpham.MaNL = nguyenlieu.MaNL and sanpham.MaSP = ?";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             $stm->bind_param('i',$MaSP);
@@ -57,7 +59,8 @@
         }
         public static function getAll()
         {
-            $sql = "select * from sanpham";
+            $sql = "select * 
+            from sanpham";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             if(!$stm->execute())
@@ -69,7 +72,7 @@
             $list = array();
             foreach($data as $s)
             {
-                $list[] = new Sanpham($s[0],$s[1],$s[2],$s[3],$s[4],$s[5],$s[6],$s[7]);
+                $list[] = new Sanpham($s[0],$s[1],$s[2],$s[3],$s[4],$s[5]);
             }
             return $list;
 
@@ -89,11 +92,11 @@
         public static function edit($object)
         {
             $sql = "update sanpham 
-                    set Ten = ?,Anh = ? ,SoLuong = ?, Gia = ?,category_id = ?
+                    set Ten = ?,Anh = ? ,MaNL= ?, Gia = ?,category_id = ?
                     where MaSP = ?";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
-            $stm->bind_param('ssiiii',$object->Ten,$object->Anh,$object->SoLuong,$object->Gia,$object->category_id,$object->MaSP);
+            $stm->bind_param('ssiiii',$object->Ten,$object->Anh,$object->MaNL,$object->Gia,$object->category_id,$object->MaSP);
             if(!$stm->execute())
             {
                 return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");
@@ -102,10 +105,10 @@
         }
         public static function create($object)
         {
-            $sql = "insert into sanpham(`Ten`,`Anh`,`SoLuong`,`Gia`,`category_id`) values(?,?,?,?,?)";
+            $sql = "insert into sanpham(`Ten`,`Anh`,`MaNL`,`Gia`,`category_id`) values(?,?,?,?,?)";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
-            $stm->bind_param('ssiii',$object->Ten,$object->Anh,$object->SoLuong,$object->Gia,$object->category_id);
+            $stm->bind_param('ssiii',$object->Ten,$object->Anh,$object->MaNL,$object->Gia,$object->category_id);
             if(!$stm->execute())
             {
                 return array('code'=> 1,'error' =>"Có lỗi, vui lòng thử lại sau!");

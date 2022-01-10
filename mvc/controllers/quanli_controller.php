@@ -3,6 +3,8 @@
     require_once('models/Nhanvien.php');
     require_once('models/Sanpham.php');
     require_once('models/Danhmuc.php');
+    require_once('models/Taikhoan.php'); 
+    require_once('models/Nguyenlieu.php'); 
     require_once('function.php');
 
     class QuanliController extends BaseController{ 
@@ -24,7 +26,8 @@
             $this->render();
             if ($class == "Sanpham")
             {
-                $select = Danhmuc::getAll();
+                $select = array('Danhmuc' => Danhmuc::getAll() , 'Nguyenlieu' => NguyenLieu::getAll());
+
                 $this->title($this->class,
                              array($this->list($data,$view,$select))
                 );
@@ -74,7 +77,7 @@
             {
                 $account = Taikhoan::register($obj->SDT,$obj->SDT,$obj->Loai);
             }
-            $data['data'] = Nhanvien::getLast();
+            $data['data'] = $class::getLast();
             echo json_encode($data);
         }
         public function upload($action,$class)

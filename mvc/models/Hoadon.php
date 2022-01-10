@@ -41,7 +41,7 @@
         }
         public static function getSize()
         {
-            $sql = "select * from hoadon";
+            $sql = "select * from hoadon ORDER BY MaHD DESC LIMIT 1";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             if(!$stm->execute())
@@ -49,7 +49,8 @@
                 return array('code'=> 2,'error' =>"Có lỗi");
             }
             $result = $stm->get_result();
-            return $result->num_rows;
+            $data = $result->fetch_assoc();
+            return $data['MaHD'];
         }
 
  
@@ -102,7 +103,7 @@
         }
         public static function create($MaHD,$TenNV,$NgayTao,$TongTien,$TrangThai)
         {
-            $sql = "insert into hoadon(`TenNV`,`NgayTao`,`TongTien`,`TrangThai`) values(?,?,?,?)";
+            $sql = "insert into hoadon(`MaHD`,`TenNV`,`NgayTao`,`TongTien`,`TrangThai`) values(?,?,?,?,?)";
             $conn = Connection::open_database();
             $stm = $conn->prepare($sql);
             $stm->bind_param('sssis',$MaHD,$TenNV,$NgayTao,$TongTien,$TrangThai);

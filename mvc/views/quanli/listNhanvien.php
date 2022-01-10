@@ -13,7 +13,7 @@
                     <li style='width:20%;'>Giới Tính</li>
                     <li style='width:15%;'>Loại</li>
                     <li style='width:20%;'>
-                	    <button  data-toggle='modal' data-target='#createNhanvien'  class='Them'>Thêm mới</button>
+                	    <button  data-toggle='modal' data-target='#createNhanvien'  class='Them btn'>Thêm mới</button>
                     </li>
                 </ul> ";
             foreach($data[$class] as $d)
@@ -27,8 +27,8 @@
                     <li style='width:20%;'>$gt</li>
                     <li style='width:15%;'>$d->Loai</li>	
                     <li style='width:20%;'>
-                        <button  onclick='view(`$d->MaNV`,`quanli`,`view`,`$class`,this)'   data-toggle='modal' data-target='#viewNhanvien' class='Xem' id='btnSua' >Xem</button>
-                        <button  onclick='message(`$d->MaNV`,`quanli`,`delete`,`$class`,this)' data-toggle='modal' data-target='#question'  class='Xoa' name='delete' id='btnXoa' >Xoá</button>
+                        <button  onclick='view(`$d->MaNV`,`quanli`,`view`,`$class`,this)'   data-toggle='modal' data-target='#viewNhanvien' class='Xem btn'  >Xem</button>
+                        <button  onclick='message(`$d->MaNV`,`quanli`,`delete`,`$class`,this)' data-toggle='modal' data-target='#question'  class='Xoa btn'  >Xoá</button>
                     </li>	                              
                 </ul>
                 ";

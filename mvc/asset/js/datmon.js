@@ -110,22 +110,56 @@ function trans(Gia)
     return stringGia;
 }
 
-function payByCash()
+function payByCash($check)
 {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','function.php?getCart=true');
+    xhr.send();
+    xhr.addEventListener('load',e =>{
+        if (xhr.readyState === 4 && xhr.status ===200)
+        {
+            let response = xhr.responseText;
+            
+            var data = JSON.parse(response);
+            
+            if(data.cart == null)
+            {
+                var mess = document.getElementById('ThongBaoModal');
+                var content = mess.querySelector('#Content-Thongbao');
+                content.innerHTML = 'Cần đặt món trước';        
+                $('#ThongBaoModal').modal('toggle');
+            }
+            else
+            {
+                if($check == 0)
+                {
+                    let tong_tien = document.getElementsByClassName('tong__tien')[0];
+                    let tien = tong_tien.querySelector('span');
+                
+                    let modal = document.getElementById('payByCash');
+                    let totalBill = modal.querySelector('#totalBill');
+                    totalBill.innerHTML = tien.innerHTML;
+                    $('#payByCash').modal('toggle');
+                }
+                else
+                {
+                    $('#payByCredit').modal('toggle');
+                }
+            }
+        }
 
-    let tong_tien = document.getElementsByClassName('tong__tien')[0];
-    let tien = tong_tien.querySelector('span');
-
-    let modal = document.getElementById('payByCash');
-    let totalBill = modal.querySelector('#totalBill');
-    totalBill.innerHTML = tien.innerHTML;
+    });
 }
 
-
-function moneyOfCustomer(e,check)
+function payment()
 {
 
-    moneyOfCus = parseInt(e.value);
+}
+
+function moneyOfCustom(e,check)
+{
+
+    var moneyOfCus = parseInt(e.value);
     if(check == 0)
     {
         var exceedCash = document.getElementsByClassName('exceedCash')[check];

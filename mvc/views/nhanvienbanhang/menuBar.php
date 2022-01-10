@@ -1,12 +1,12 @@
-<li class='navbar-item navbar-noti'>
-    <a  href='?controller=nhanvienbanhang&action=index&class=hoadon' class='navbar-item-link'>
+<a  href='?controller=nhanvienbanhang&action=index&class=hoadon' class='navbar-item-link'>
+    <li class='navbar-item navbar-noti'>
         <i class='fas fa-money-bill-wave-alt'></i>
-        Quản Lý Hoá đơn
-    </a> 
-</li>
-<li class='navbar-item navbar-noti'>
-    <a  href='?controller=nhanvienbanhang&action=index&class=sanpham' class='navbar-item-link'>
-        <i class="fas fa-mug-hot"></i>
-        Đặt Món
-    </a>
-</li>
+        Quản Lý Hoá đơn 
+    </li>
+</a> 
+<a  href='?controller=nhanvienbanhang&action=index&class=sanpham' class='navbar-item-link'>
+    <li class='navbar-item navbar-noti'>
+            <i class="fas fa-mug-hot"></i>
+            Đặt Món
+    </li>
+</a>

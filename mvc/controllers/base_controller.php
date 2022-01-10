@@ -27,7 +27,7 @@
             extract($select);
             
             ob_start();
-            if($controller == "quanli")
+            if($controller != "nhanvienbanhang")
             {
                 require_once('views/'.$this->controller.'/model'.$this->class.'.php');
             }
